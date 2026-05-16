@@ -171,7 +171,7 @@ function Index() {
       <div className="pointer-events-none absolute inset-0 bg-radial-glow opacity-70" />
 
       {/* NAV */}
-      <header className="sticky top-0 z-50 bg-background/60 backdrop-blur-md border-b border-border/40">
+      <header className="sticky top-0 z-50 bg-background/70 backdrop-blur-md border-b border-border/40">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <a href="/" className="flex items-center gap-2 font-mono text-sm">
             <span className="text-primary text-glow">{"</>"}</span>
