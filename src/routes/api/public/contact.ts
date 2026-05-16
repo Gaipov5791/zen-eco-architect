@@ -8,7 +8,7 @@ const schema = z.object({
 });
 
 const FROM = "ZenTech <onboarding@resend.dev>";
-const TO_FALLBACK = "gaipov5791@gmail.com";
+const TO_FALLBACK = "bakyt.gaipov.kk@gmail.com";
 
 function escapeHtml(s: string) {
   return s
