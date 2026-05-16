@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Cpu, Globe2, Waves, Brain, Shield, Zap } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Cpu, Globe2, Waves, Brain, Shield, Zap, Phone, MessageSquare, ExternalLink } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import { ContactForm } from "@/components/ContactForm";
 import cyborg from "@/assets/cyborg-architect.jpg";
@@ -29,56 +30,185 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const STRIPE_LINK = "https://buy.stripe.com/test_aEUbJ16Lg1Uvc7e3cc"; // $200 / $490 test link
+const STRIPE_LINK = "https://buy.stripe.com/test_aEUbJ16Lg1Uvc7e3cc";
+const PHONE = "+996 550 909 950";
+const WHATSAPP_URL = "https://wa.me/996556016898";
+const WHATSAPP_DISPLAY = "+996 556 016 898 (WhatsApp)";
+
+type Lang = "en" | "ru";
+
+const t = {
+  en: {
+    pillars: "Pillars",
+    capabilities: "Capabilities",
+    contact: "Contact",
+    bookAudit: "Book Audit",
+    badge: "Lead Architect — Bakyt Gaipov",
+    title: ["ZenTech", "Enterprise", "Ecosystems"],
+    headline: "Architecting AI-Driven Digital Ecosystems for Enterprise Business",
+    sub: (
+      <>
+        We engineer resilient MERN infrastructures, automate complex corporate workflows, and
+        integrate custom AI intelligence that cuts operational expenses by up to{" "}
+        <span className="text-primary font-semibold">40%</span>.
+      </>
+    ),
+    ctaBook: "Book AI Audit",
+    ctaExplore: "Explore Our Pillars",
+    stats: [
+      { k: "40%", v: "OpEx reduction" },
+      { k: "3", v: "Live ecosystems" },
+      { k: "24/7", v: "AI uptime" },
+    ],
+    pillarsKicker: "— Proof of architecture",
+    pillarsTitle: "The Three Pillars",
+    pillarsDesc: "Production ecosystems engineered, deployed, and operated under the ZenTech standard.",
+    contactKicker: "— Initiate contact",
+    contactTitle1: "Engage the ",
+    contactTitle2: "Architect",
+    contactDesc: "Tell us about your enterprise challenge. Routed via Resend directly to Bakyt Gaipov.",
+  },
+  ru: {
+    pillars: "Столпы",
+    capabilities: "Возможности",
+    contact: "Контакт",
+    bookAudit: "ИИ-Аудит",
+    badge: "Ведущий Архитектор — Бакыт Гаипов",
+    title: ["ZenTech", "Корпоративные", "Экосистемы"],
+    headline: "Проектирование Цифровых Экосистем на Базе ИИ для Крупного Бизнеса",
+    sub: (
+      <>
+        Мы создаем отказоустойчивую MERN-инфраструктуру, автоматизируем сложные корпоративные
+        воркфлоу и внедряем кастомный искусственный интеллект, сокращающий операционные расходы
+        (OpEx) до <span className="text-primary font-semibold">40%</span>.
+      </>
+    ),
+    ctaBook: "Забронировать ИИ-Аудит",
+    ctaExplore: "Доказательство Архитектуры",
+    stats: [
+      { k: "40%", v: "Снижение OpEx" },
+      { k: "3", v: "Готовых экосистемы" },
+      { k: "24/7", v: "ИИ доступность" },
+    ],
+    pillarsKicker: "— Доказательство архитектуры",
+    pillarsTitle: "Три Столпа",
+    pillarsDesc: "Производственные экосистемы, спроектированные и эксплуатируемые по стандарту ZenTech.",
+    contactKicker: "— Инициировать контакт",
+    contactTitle1: "Связаться с ",
+    contactTitle2: "Архитектором",
+    contactDesc: "Расскажите о корпоративной задаче. Сообщение поступит напрямую Бакыту Гаипову.",
+  },
+} as const;
 
 const pillars = [
   {
     name: "Birge Web",
-    tag: "MERN Infrastructure",
-    desc: "Resilient full-stack platforms unifying corporate operations on a single, scalable MERN backbone.",
+    tag: { en: "MERN Infrastructure", ru: "MERN Инфраструктура" },
+    desc: {
+      en: "Resilient full-stack platforms unifying corporate operations on a single, scalable MERN backbone.",
+      ru: "Отказоустойчивые full-stack платформы, объединяющие корпоративные операции на масштабируемой MERN-основе.",
+    },
     icon: Globe2,
+    url: "https://birge-mern-fullstack.vercel.app",
   },
   {
     name: "Elbrus Hydro",
-    tag: "Industrial Automation",
-    desc: "Real-time monitoring and predictive workflow automation for heavy-asset energy operations.",
+    tag: { en: "Industrial Automation", ru: "Промышленная Автоматизация" },
+    desc: {
+      en: "Real-time monitoring and predictive workflow automation for heavy-asset energy operations.",
+      ru: "Мониторинг в реальном времени и предиктивная автоматизация для энергетических активов.",
+    },
     icon: Waves,
+    url: "https://gaipov5791.github.io/powerstation-present/",
   },
   {
     name: "ZenTechAI",
-    tag: "Custom AI Intelligence",
-    desc: "Bespoke LLM agents and inference pipelines that reduce operational expenses by up to 40%.",
+    tag: { en: "Custom AI Intelligence", ru: "Кастомный ИИ" },
+    desc: {
+      en: "Bespoke LLM agents and inference pipelines that reduce operational expenses by up to 40%.",
+      ru: "Кастомные LLM-агенты и пайплайны инференса, снижающие операционные расходы до 40%.",
+    },
     icon: Brain,
+    url: "https://zen-tech-75uo3mn9y-gaipov5791s-projects.vercel.app",
   },
 ];
 
 function Index() {
+  const [lang, setLang] = useState<Lang>("ru");
+  const L = t[lang];
+
+  const capabilities = [
+    {
+      i: Cpu,
+      t: lang === "ru" ? "MERN на масштабе" : "MERN at Scale",
+      d:
+        lang === "ru"
+          ? "Проверенные стеки Node, Mongo, Express, React, настроенные под корпоративные нагрузки."
+          : "Battle-tested Node, Mongo, Express, React stacks tuned for enterprise concurrency.",
+    },
+    {
+      i: Shield,
+      t: lang === "ru" ? "Compliance-First" : "Compliance-First",
+      d:
+        lang === "ru"
+          ? "Архитектуры под SOC2 с журналами аудита и zero-trust границами."
+          : "SOC2-ready architectures with audit trails and zero-trust boundaries.",
+    },
+    {
+      i: Zap,
+      t: lang === "ru" ? "ИИ Автоматизация" : "AI Automation",
+      d:
+        lang === "ru"
+          ? "Кастомные LLM-агенты, встроенные напрямую в CRM, ERP и операционный слой."
+          : "Custom LLM agents wired directly into your CRM, ERP and operations layer.",
+    },
+  ];
+
   return (
     <div className="min-h-screen relative overflow-hidden">
       <Toaster theme="dark" richColors position="top-right" />
 
-      {/* Radial glow backdrop */}
       <div className="pointer-events-none absolute inset-0 bg-radial-glow opacity-70" />
 
       {/* NAV */}
-      <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-        <a href="/" className="flex items-center gap-2 font-mono text-sm">
-          <span className="text-primary text-glow">{"</>"}</span>
-          <span className="font-semibold tracking-tight">ZenTech</span>
-        </a>
-        <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-          <a href="#pillars" className="hover:text-primary transition">Pillars</a>
-          <a href="#why" className="hover:text-primary transition">Capabilities</a>
-          <a href="#contact" className="hover:text-primary transition">Contact</a>
-        </nav>
-        <a
-          href={STRIPE_LINK}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center gap-2 rounded-md border border-primary/40 px-4 py-2 text-sm text-primary hover:bg-primary/10 transition"
-        >
-          Book Audit
-        </a>
+      <header className="sticky top-0 z-50 bg-background/60 backdrop-blur-md border-b border-border/40">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <a href="/" className="flex items-center gap-2 font-mono text-sm">
+            <span className="text-primary text-glow">{"</>"}</span>
+            <span className="font-semibold tracking-tight">ZenTech</span>
+          </a>
+          <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+            <a href="#pillars" className="hover:text-primary transition">{L.pillars}</a>
+            <a href="#why" className="hover:text-primary transition">{L.capabilities}</a>
+            <a href="#contact" className="hover:text-primary transition">{L.contact}</a>
+          </nav>
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:flex items-center rounded-md border border-border/60 font-mono text-xs overflow-hidden">
+              <button
+                onClick={() => setLang("en")}
+                className={`px-2.5 py-1.5 transition ${lang === "en" ? "bg-primary/15 text-primary" : "text-muted-foreground hover:text-foreground"}`}
+                aria-label="English"
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLang("ru")}
+                className={`px-2.5 py-1.5 transition ${lang === "ru" ? "bg-primary/15 text-primary" : "text-muted-foreground hover:text-foreground"}`}
+                aria-label="Русский"
+              >
+                RU
+              </button>
+            </div>
+            <a
+              href={STRIPE_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center gap-2 rounded-md border border-primary/40 px-4 py-2 text-sm text-primary hover:bg-primary/10 transition"
+            >
+              {L.bookAudit}
+            </a>
+          </div>
+        </div>
       </header>
 
       {/* HERO */}
@@ -86,23 +216,21 @@ function Index() {
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-mono text-primary mb-6">
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-            Lead Architect — Bakyt Gaipov
+            {L.badge}
           </div>
 
           <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.05]">
-            <span className="block text-glow text-primary">ZenTech</span>
-            <span className="block text-foreground">Enterprise</span>
-            <span className="block text-foreground">Ecosystems</span>
+            <span className="block text-glow text-primary">{L.title[0]}</span>
+            <span className="block text-foreground">{L.title[1]}</span>
+            <span className="block text-foreground">{L.title[2]}</span>
           </h1>
 
           <p className="mt-6 text-2xl md:text-3xl font-semibold leading-tight text-foreground/90">
-            Architecting AI-Driven Digital Ecosystems for Enterprise Business
+            {L.headline}
           </p>
 
           <p className="mt-5 text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
-            We engineer resilient MERN infrastructures, automate complex corporate workflows, and
-            integrate custom AI intelligence that cuts operational expenses by up to{" "}
-            <span className="text-primary font-semibold">40%</span>.
+            {L.sub}
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -112,23 +240,19 @@ function Index() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-md bg-gradient-primary text-primary-foreground font-semibold px-6 py-3.5 shadow-glow hover:scale-[1.02] transition-transform"
             >
-              Book AI Audit ($4 audit/test link)
+              {L.ctaBook}
               <ArrowRight className="h-5 w-5" />
             </a>
             <a
               href="#pillars"
               className="inline-flex items-center justify-center gap-2 rounded-md border border-primary/40 bg-background/40 backdrop-blur px-6 py-3.5 font-semibold text-foreground hover:bg-primary/10 hover:border-primary transition"
             >
-              Explore Our Pillars
+              {L.ctaExplore}
             </a>
           </div>
 
           <div className="mt-10 grid grid-cols-3 gap-6 max-w-md">
-            {[
-              { k: "40%", v: "OpEx reduction" },
-              { k: "3", v: "Live ecosystems" },
-              { k: "24/7", v: "AI uptime" },
-            ].map((s) => (
+            {L.stats.map((s) => (
               <div key={s.v}>
                 <div className="text-2xl font-bold text-primary text-glow">{s.k}</div>
                 <div className="text-xs text-muted-foreground mt-1">{s.v}</div>
@@ -137,7 +261,6 @@ function Index() {
           </div>
         </div>
 
-        {/* Avatar */}
         <div className="relative">
           <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full" />
           <div className="relative rounded-2xl overflow-hidden border border-primary/30 shadow-glow">
@@ -160,27 +283,29 @@ function Index() {
       {/* PILLARS */}
       <section id="pillars" className="relative z-10 mx-auto max-w-7xl px-6 py-24">
         <div className="mb-14 text-center">
-          <p className="font-mono text-xs text-primary tracking-widest uppercase">— Proof of architecture</p>
-          <h2 className="mt-3 text-4xl md:text-5xl font-bold tracking-tight">
-            The Three Pillars
-          </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Production ecosystems engineered, deployed, and operated under the ZenTech standard.
-          </p>
+          <p className="font-mono text-xs text-primary tracking-widest uppercase">{L.pillarsKicker}</p>
+          <h2 className="mt-3 text-4xl md:text-5xl font-bold tracking-tight">{L.pillarsTitle}</h2>
+          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">{L.pillarsDesc}</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {pillars.map((p) => (
-            <div
+            <a
               key={p.name}
-              className="group relative rounded-xl border border-border bg-card/60 backdrop-blur p-7 hover:border-primary/60 transition-all hover:shadow-glow-sm"
+              href={p.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative rounded-xl border border-border bg-card/60 backdrop-blur p-7 hover:border-primary/60 transition-all hover:shadow-glow-sm block"
             >
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 border border-primary/30 text-primary group-hover:shadow-glow-sm transition">
-                <p.icon className="h-6 w-6" />
+              <div className="flex items-start justify-between">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 border border-primary/30 text-primary group-hover:shadow-glow-sm transition">
+                  <p.icon className="h-6 w-6" />
+                </div>
+                <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition" />
               </div>
-              <div className="mt-5 font-mono text-xs text-primary uppercase tracking-wider">{p.tag}</div>
+              <div className="mt-5 font-mono text-xs text-primary uppercase tracking-wider">{p.tag[lang]}</div>
               <h3 className="mt-1 text-2xl font-bold">{p.name}</h3>
-              <p className="mt-3 text-muted-foreground leading-relaxed">{p.desc}</p>
-            </div>
+              <p className="mt-3 text-muted-foreground leading-relaxed">{p.desc[lang]}</p>
+            </a>
           ))}
         </div>
       </section>
@@ -188,11 +313,7 @@ function Index() {
       {/* CAPABILITIES */}
       <section id="why" className="relative z-10 mx-auto max-w-7xl px-6 py-24 border-t border-border">
         <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { i: Cpu, t: "MERN at Scale", d: "Battle-tested Node, Mongo, Express, React stacks tuned for enterprise concurrency." },
-            { i: Shield, t: "Compliance-First", d: "SOC2-ready architectures with audit trails and zero-trust boundaries." },
-            { i: Zap, t: "AI Automation", d: "Custom LLM agents wired directly into your CRM, ERP and operations layer." },
-          ].map((x) => (
+          {capabilities.map((x) => (
             <div key={x.t} className="flex gap-4">
               <x.i className="h-8 w-8 text-primary shrink-0" />
               <div>
@@ -207,13 +328,30 @@ function Index() {
       {/* CONTACT */}
       <section id="contact" className="relative z-10 mx-auto max-w-3xl px-6 py-24">
         <div className="mb-10 text-center">
-          <p className="font-mono text-xs text-primary tracking-widest uppercase">— Initiate contact</p>
+          <p className="font-mono text-xs text-primary tracking-widest uppercase">{L.contactKicker}</p>
           <h2 className="mt-3 text-4xl md:text-5xl font-bold tracking-tight">
-            Engage the <span className="text-primary text-glow">Architect</span>
+            {L.contactTitle1}<span className="text-primary text-glow">{L.contactTitle2}</span>
           </h2>
-          <p className="mt-4 text-muted-foreground">
-            Tell us about your enterprise challenge. Routed via Resend directly to Bakyt Gaipov.
-          </p>
+          <p className="mt-4 text-muted-foreground">{L.contactDesc}</p>
+
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 font-mono text-sm">
+            <a
+              href={`tel:${PHONE.replace(/\s/g, "")}`}
+              className="inline-flex items-center gap-2 rounded-md border border-primary/30 bg-primary/5 px-4 py-2 text-primary hover:bg-primary/10 hover:shadow-glow-sm transition"
+            >
+              <Phone className="h-4 w-4" />
+              {PHONE}
+            </a>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-md border border-primary/30 bg-primary/5 px-4 py-2 text-primary hover:bg-primary/10 hover:shadow-glow-sm transition"
+            >
+              <MessageSquare className="h-4 w-4" />
+              {WHATSAPP_DISPLAY}
+            </a>
+          </div>
         </div>
         <ContactForm />
       </section>
@@ -221,7 +359,15 @@ function Index() {
       <footer className="relative z-10 border-t border-border mt-12">
         <div className="mx-auto max-w-7xl px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground font-mono">
           <span>© 2026 ZenTech Enterprise Ecosystems</span>
-          <span>bakyt.dev — Lead Architect: Bakyt Gaipov</span>
+          <div className="flex items-center gap-4">
+            <a href={`tel:${PHONE.replace(/\s/g, "")}`} className="inline-flex items-center gap-1.5 hover:text-primary transition">
+              <Phone className="h-3.5 w-3.5" /> {PHONE}
+            </a>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 hover:text-primary transition">
+              <MessageSquare className="h-3.5 w-3.5" /> +996 556 016 898
+            </a>
+          </div>
+          <span>bakyt.dev — Bakyt Gaipov</span>
         </div>
       </footer>
     </div>
