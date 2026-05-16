@@ -22,12 +22,19 @@ export function ContactForm() {
     }
     setLoading(true);
     try {
-      // Resend API wiring point — frontend prepared
-      await new Promise((r) => setTimeout(r, 1200));
-      toast.success("Message initiated via Resend! Our Lead Architect will contact you shortly.");
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(parsed.data),
+      });
+      if (!res.ok) {
+        const { error } = await res.json().catch(() => ({ error: "" }));
+        throw new Error(error || `Request failed (${res.status})`);
+      }
+      toast.success("Message transmitted via Resend. Our Lead Architect will contact you shortly.");
       setForm({ name: "", email: "", message: "" });
-    } catch {
-      toast.error("Something went wrong. Please try again.");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
