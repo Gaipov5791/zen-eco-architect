@@ -9,7 +9,33 @@ const schema = z.object({
   message: z.string().trim().min(1, "Message is required").max(1000),
 });
 
-export function ContactForm() {
+type Lang = "en" | "ru";
+
+const COPY = {
+  en: {
+    name: "Your name",
+    email: "Corporate email",
+    message: "Briefly describe your enterprise challenge...",
+    sending: "Transmitting to Resend…",
+    send: "Send Encrypted Message",
+    fillAll: "Please fill all fields",
+    success: "Message transmitted via Resend. Our Lead Architect will contact you shortly.",
+    error: "Something went wrong. Please try again.",
+  },
+  ru: {
+    name: "Ваше имя",
+    email: "Корпоративный Email",
+    message: "Опишите вашу бизнес-задачу или проект...",
+    sending: "Отправка через Resend…",
+    send: "Отправить зашифрованное сообщение",
+    fillAll: "Пожалуйста, заполните все поля",
+    success: "Сообщение отправлено через Resend. Ведущий архитектор скоро свяжется с вами.",
+    error: "Что-то пошло не так. Попробуйте снова.",
+  },
+} as const;
+
+export function ContactForm({ lang = "en" }: { lang?: Lang }) {
+  const c = COPY[lang];
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
 
@@ -17,7 +43,7 @@ export function ContactForm() {
     e.preventDefault();
     const parsed = schema.safeParse(form);
     if (!parsed.success) {
-      toast.error(parsed.error.issues[0]?.message ?? "Please fill all fields");
+      toast.error(parsed.error.issues[0]?.message ?? c.fillAll);
       return;
     }
     setLoading(true);
@@ -31,10 +57,10 @@ export function ContactForm() {
         const { error } = await res.json().catch(() => ({ error: "" }));
         throw new Error(error || `Request failed (${res.status})`);
       }
-      toast.success("Message transmitted via Resend. Our Lead Architect will contact you shortly.");
+      toast.success(c.success);
       setForm({ name: "", email: "", message: "" });
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      toast.error(err instanceof Error ? err.message : c.error);
     } finally {
       setLoading(false);
     }
@@ -47,7 +73,7 @@ export function ContactForm() {
     <form onSubmit={onSubmit} className="space-y-4 max-w-xl mx-auto">
       <input
         className={field}
-        placeholder="Your name"
+        placeholder={c.name}
         value={form.name}
         onChange={(e) => setForm({ ...form, name: e.target.value })}
         disabled={loading}
@@ -56,7 +82,7 @@ export function ContactForm() {
       <input
         type="email"
         className={field}
-        placeholder="Corporate email"
+        placeholder={c.email}
         value={form.email}
         onChange={(e) => setForm({ ...form, email: e.target.value })}
         disabled={loading}
@@ -65,7 +91,7 @@ export function ContactForm() {
       <textarea
         rows={5}
         className={field + " resize-none"}
-        placeholder="Briefly describe your enterprise challenge..."
+        placeholder={c.message}
         value={form.message}
         onChange={(e) => setForm({ ...form, message: e.target.value })}
         disabled={loading}
