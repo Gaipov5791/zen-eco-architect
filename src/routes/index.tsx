@@ -353,7 +353,7 @@ function Index() {
             </a>
           </div>
         </div>
-        <ContactForm />
+        <ContactForm lang={lang} />
       </section>
 
       <footer className="relative z-10 border-t border-border mt-12">
