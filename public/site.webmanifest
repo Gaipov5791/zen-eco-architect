@@ -1,0 +1,11 @@
+{
+  "name": "ZenTech Enterprise Ecosystems",
+  "short_name": "ZenTech",
+  "icons": [
+    { "src": "/app-icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "theme_color": "#0a0f0a",
+  "background_color": "#0a0f0a",
+  "display": "standalone",
+  "start_url": "/"
+}
