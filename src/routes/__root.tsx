@@ -81,6 +81,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "ZenTech Enterprise Ecosystems" },
+      { name: "twitter:description", content: "Architecting AI-driven digital ecosystems for enterprise business." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3608b11b-3413-4084-80f0-db7879de69a0/id-preview-44f27e3d--72565650-5f7d-46fe-a0c0-e7d2a4a72798.lovable.app-1778952351396.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3608b11b-3413-4084-80f0-db7879de69a0/id-preview-44f27e3d--72565650-5f7d-46fe-a0c0-e7d2a4a72798.lovable.app-1778952351396.png" },
     ],
     links: [
       {
