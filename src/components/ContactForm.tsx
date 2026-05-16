@@ -105,12 +105,12 @@ export function ContactForm({ lang = "en" }: { lang?: Lang }) {
         {loading ? (
           <>
             <Loader2 className="h-5 w-5 animate-spin" />
-            Transmitting to Resend…
+            {c.sending}
           </>
         ) : (
           <>
             <Send className="h-5 w-5" />
-            Send Encrypted Message
+            {c.send}
           </>
         )}
       </button>
