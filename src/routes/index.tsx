@@ -30,7 +30,8 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const STRIPE_LINK = "https://buy.stripe.com/test_aEUbJ16Lg1Uvc7e3cc";
+const STRIPE_AUDIT_LINK = "https://buy.stripe.com/test_8x200jbyP8FqeRJ9OWc3m02";
+const STRIPE_AI_LINK = "https://buy.stripe.com/test_14A3cv1YfbRCgZRf9gc3m05";
 const PHONE = "+996 550 909 950";
 const WHATSAPP_URL = "https://wa.me/996556016898";
 const WHATSAPP_DISPLAY = "+996 556 016 898 (WhatsApp)";
