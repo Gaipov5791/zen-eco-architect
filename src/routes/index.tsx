@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, Cpu, Globe2, Waves, Brain, Shield, Zap, Phone, MessageSquare, ExternalLink } from "lucide-react";
+import { ArrowRight, Cpu, Globe2, Waves, Brain, Shield, Zap, Phone, MessageSquare, ExternalLink, Menu, X } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import { ContactForm } from "@/components/ContactForm";
 import cyborg from "@/assets/cyborg-architect.jpg";
