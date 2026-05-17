@@ -208,7 +208,7 @@ function Index() {
       <div className="pointer-events-none absolute inset-0 bg-radial-glow opacity-70" />
 
       {/* NAV */}
-      <header className="sticky top-0 z-50 bg-background/70 backdrop-blur-md border-b border-border/40">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-background/80 backdrop-blur-md border-b border-border/40">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <a href="/" className="flex items-center gap-2 font-mono text-sm">
             <span className="text-primary text-glow">{"</>"}</span>
@@ -257,7 +257,7 @@ function Index() {
           </div>
         </div>
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur-md">
+          <div className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur-md max-h-[calc(100vh-4rem)] overflow-y-auto">
             <nav className="mx-auto max-w-7xl px-6 py-4 flex flex-col text-sm">
               <a href="#pillars" onClick={closeMenu} className="py-3 border-b border-border/30 text-foreground hover:text-primary transition">{L.pillars}</a>
               <a href="#why" onClick={closeMenu} className="py-3 border-b border-border/30 text-foreground hover:text-primary transition">{L.capabilities}</a>
@@ -295,7 +295,7 @@ function Index() {
       </header>
 
       {/* HERO */}
-      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-12 pb-24 grid lg:grid-cols-2 gap-12 items-center">
+      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-20 sm:pt-24 pb-24 grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-mono text-primary mb-6">
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
