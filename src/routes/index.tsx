@@ -90,6 +90,7 @@ const t = {
     pillars: "Столпы",
     capabilities: "Возможности",
     contact: "Контакт",
+    servicesNav: "Услуги",
     bookAudit: "ИИ-Аудит",
     badge: "Ведущий Архитектор — Бакыт Гаипов",
     title: ["ZenTech", "Корпоративные", "Экосистемы"],
