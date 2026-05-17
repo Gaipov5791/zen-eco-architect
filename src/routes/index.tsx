@@ -344,7 +344,7 @@ function Index() {
           </div>
         </div>
 
-        <div className="relative">
+        <div className="relative max-w-[320px] sm:max-w-md mx-auto lg:max-w-none">
           <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full" />
           <div className="relative rounded-2xl overflow-hidden border border-primary/30 shadow-glow">
             <img
