@@ -202,7 +202,7 @@ function Index() {
   ];
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative overflow-x-hidden">
       <Toaster theme="dark" richColors position="top-right" />
 
       <div className="pointer-events-none absolute inset-0 bg-radial-glow opacity-70" />
