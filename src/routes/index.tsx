@@ -295,7 +295,7 @@ function Index() {
       </header>
 
       {/* HERO */}
-      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-12 pb-24 grid lg:grid-cols-2 gap-12 items-center">
+      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-20 sm:pt-24 pb-24 grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-mono text-primary mb-6">
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
