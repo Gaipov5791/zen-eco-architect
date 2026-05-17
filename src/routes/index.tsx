@@ -236,7 +236,7 @@ function Index() {
               </button>
             </div>
             <a
-              href={STRIPE_LINK}
+              href={STRIPE_AUDIT_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:inline-flex items-center gap-2 rounded-md border border-primary/40 px-4 py-2 text-sm text-primary hover:bg-primary/10 transition"
@@ -271,7 +271,7 @@ function Index() {
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <a
-              href={STRIPE_LINK}
+              href={STRIPE_AUDIT_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-md bg-gradient-primary text-primary-foreground font-semibold px-6 py-3.5 shadow-glow hover:scale-[1.02] transition-transform"
