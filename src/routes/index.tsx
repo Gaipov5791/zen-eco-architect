@@ -215,6 +215,7 @@ function Index() {
           <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
             <a href="#pillars" className="hover:text-primary transition">{L.pillars}</a>
             <a href="#why" className="hover:text-primary transition">{L.capabilities}</a>
+            <a href="#services" className="hover:text-primary transition">{L.servicesNav}</a>
             <a href="#contact" className="hover:text-primary transition">{L.contact}</a>
           </nav>
           <div className="flex items-center gap-3">
