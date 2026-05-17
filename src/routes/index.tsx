@@ -257,7 +257,7 @@ function Index() {
           </div>
         </div>
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur-md">
+          <div className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur-md max-h-[calc(100vh-4rem)] overflow-y-auto">
             <nav className="mx-auto max-w-7xl px-6 py-4 flex flex-col text-sm">
               <a href="#pillars" onClick={closeMenu} className="py-3 border-b border-border/30 text-foreground hover:text-primary transition">{L.pillars}</a>
               <a href="#why" onClick={closeMenu} className="py-3 border-b border-border/30 text-foreground hover:text-primary transition">{L.capabilities}</a>
