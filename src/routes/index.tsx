@@ -170,7 +170,9 @@ const pillars = [
 
 function Index() {
   const [lang, setLang] = useState<Lang>("ru");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const L = t[lang];
+  const closeMenu = () => setIsMobileMenuOpen(false);
 
   const capabilities = [
     {
