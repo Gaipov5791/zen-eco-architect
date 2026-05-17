@@ -245,8 +245,53 @@ function Index() {
             >
               {L.bookAudit}
             </a>
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen((v) => !v)}
+              className="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-md border border-border/60 text-foreground hover:bg-primary/10 hover:text-primary transition"
+              aria-label="Toggle navigation"
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </div>
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur-md">
+            <nav className="mx-auto max-w-7xl px-6 py-4 flex flex-col text-sm">
+              <a href="#pillars" onClick={closeMenu} className="py-3 border-b border-border/30 text-foreground hover:text-primary transition">{L.pillars}</a>
+              <a href="#why" onClick={closeMenu} className="py-3 border-b border-border/30 text-foreground hover:text-primary transition">{L.capabilities}</a>
+              <a href="#services" onClick={closeMenu} className="py-3 border-b border-border/30 text-foreground hover:text-primary transition">{L.servicesNav}</a>
+              <a href="#contact" onClick={closeMenu} className="py-3 border-b border-border/30 text-foreground hover:text-primary transition">{L.contact}</a>
+              <div className="mt-4 flex items-center rounded-md border border-border/60 font-mono text-xs overflow-hidden w-fit">
+                <button
+                  onClick={() => setLang("en")}
+                  className={`px-3 py-2 transition ${lang === "en" ? "bg-primary/15 text-primary" : "text-muted-foreground hover:text-foreground"}`}
+                  aria-label="English"
+                >
+                  EN
+                </button>
+                <button
+                  onClick={() => setLang("ru")}
+                  className={`px-3 py-2 transition ${lang === "ru" ? "bg-primary/15 text-primary" : "text-muted-foreground hover:text-foreground"}`}
+                  aria-label="Русский"
+                >
+                  RU
+                </button>
+              </div>
+              <a
+                href={STRIPE_AUDIT_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                className="mt-4 inline-flex items-center justify-center gap-2 rounded-md bg-gradient-primary text-primary-foreground font-semibold px-5 py-3 shadow-glow"
+              >
+                {L.bookAudit}
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* HERO */}
