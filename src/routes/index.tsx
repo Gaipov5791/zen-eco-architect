@@ -361,6 +361,61 @@ function Index() {
         </div>
       </section>
 
+      {/* SERVICES */}
+      <section id="services" className="relative z-10 mx-auto max-w-7xl px-6 py-16 md:py-24 border-t border-border">
+        <div className="mb-14 text-center">
+          <p className="font-mono text-xs text-primary tracking-widest uppercase">{L.services.kicker}</p>
+          <h2 className="mt-3 text-4xl md:text-5xl font-bold tracking-tight">{L.services.title}</h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Audit */}
+          <div className="group relative rounded-xl border border-border bg-card/60 backdrop-blur p-7 hover:border-primary/60 transition-all hover:shadow-glow-sm flex flex-col">
+            <h3 className="font-mono text-xs text-primary uppercase tracking-wider">{L.services.auditTitle}</h3>
+            <p className="mt-4 text-muted-foreground leading-relaxed flex-1">{L.services.auditDesc}</p>
+            <div className="mt-6 text-2xl font-bold text-foreground">{L.services.auditPrice}</div>
+            <a
+              href={STRIPE_AUDIT_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center justify-center gap-2 rounded-md bg-gradient-primary text-primary-foreground font-semibold px-5 py-3 shadow-glow hover:scale-[1.02] transition-transform"
+            >
+              {L.services.auditCta}
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+
+          {/* AI Integration */}
+          <div className="group relative rounded-xl border border-border bg-card/60 backdrop-blur p-7 hover:border-primary/60 transition-all hover:shadow-glow-sm flex flex-col">
+            <h3 className="font-mono text-xs text-primary uppercase tracking-wider">{L.services.aiTitle}</h3>
+            <p className="mt-4 text-muted-foreground leading-relaxed flex-1">{L.services.aiDesc}</p>
+            <div className="mt-6 text-2xl font-bold text-foreground">{L.services.aiPrice}</div>
+            <a
+              href={STRIPE_AI_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center justify-center gap-2 rounded-md bg-gradient-primary text-primary-foreground font-semibold px-5 py-3 shadow-glow hover:scale-[1.02] transition-transform"
+            >
+              {L.services.aiCta}
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+
+          {/* Ecosystem */}
+          <div className="group relative rounded-xl border border-border bg-card/60 backdrop-blur p-7 hover:border-primary/60 transition-all hover:shadow-glow-sm flex flex-col md:col-span-2 lg:col-span-1">
+            <h3 className="font-mono text-xs text-primary uppercase tracking-wider">{L.services.ecoTitle}</h3>
+            <p className="mt-4 text-muted-foreground leading-relaxed flex-1">{L.services.ecoDesc}</p>
+            <div className="mt-6 text-2xl font-bold text-foreground">{L.services.ecoPrice}</div>
+            <a
+              href="#contact"
+              className="mt-5 inline-flex items-center justify-center gap-2 rounded-md border border-primary/40 bg-background/40 backdrop-blur px-5 py-3 font-semibold text-foreground hover:bg-primary/10 hover:border-primary transition"
+            >
+              {L.services.ecoCta}
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* CONTACT */}
       <section id="contact" className="relative z-10 mx-auto max-w-3xl px-6 py-24">
         <div className="mb-10 text-center">
