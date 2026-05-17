@@ -302,7 +302,7 @@ function Index() {
             {L.badge}
           </div>
 
-          <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.05]">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05]">
             <span className="block text-glow text-primary">{L.title[0]}</span>
             <span className="block text-foreground">{L.title[1]}</span>
             <span className="block text-foreground">{L.title[2]}</span>
