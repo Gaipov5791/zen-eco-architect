@@ -30,7 +30,8 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const STRIPE_LINK = "https://buy.stripe.com/test_aEUbJ16Lg1Uvc7e3cc";
+const STRIPE_AUDIT_LINK = "https://buy.stripe.com/test_8x200jbyP8FqeRJ9OWc3m02";
+const STRIPE_AI_LINK = "https://buy.stripe.com/test_14A3cv1YfbRCgZRf9gc3m05";
 const PHONE = "+996 550 909 950";
 const WHATSAPP_URL = "https://wa.me/996556016898";
 const WHATSAPP_DISPLAY = "+996 556 016 898 (WhatsApp)";
@@ -42,6 +43,7 @@ const t = {
     pillars: "Pillars",
     capabilities: "Capabilities",
     contact: "Contact",
+    servicesNav: "Services",
     bookAudit: "Book Audit",
     badge: "Lead Architect — Bakyt Gaipov",
     title: ["ZenTech", "Enterprise", "Ecosystems"],
@@ -67,11 +69,28 @@ const t = {
     contactTitle1: "Engage the ",
     contactTitle2: "Architect",
     contactDesc: "Tell us about your enterprise challenge. Routed via Resend directly to Bakyt Gaipov.",
+    services: {
+      kicker: "— Tailored Engagement Models",
+      title: "Enterprise Solutions & Services",
+      auditTitle: "01 / AI & Infrastructure Audit",
+      auditDesc: "Comprehensive technical review of your current pipeline, custom MERN/AI architecture blueprint, and detailed ROI projection.",
+      auditPrice: "$490 / Fixed Price",
+      auditCta: "Book Audit via Stripe",
+      aiTitle: "02 / Custom AI Intelligence Integration",
+      aiDesc: "Bespoke LLM agents wired directly into your CRM/ERP layers, automating corporate workflows and slashing OpEx up to 40%.",
+      aiPrice: "$2,490 / Deployment",
+      aiCta: "Initiate AI Core",
+      ecoTitle: "03 / Full-Scale Digital Ecosystem",
+      ecoDesc: "End-to-end engineering of a resilient corporate backbone. Custom industrial monitoring, high-concurrency MERN infrastructure, and zero-trust security.",
+      ecoPrice: "Custom B2B Contract",
+      ecoCta: "Engage Architect for Quote",
+    },
   },
   ru: {
     pillars: "Столпы",
     capabilities: "Возможности",
     contact: "Контакт",
+    servicesNav: "Услуги",
     bookAudit: "ИИ-Аудит",
     badge: "Ведущий Архитектор — Бакыт Гаипов",
     title: ["ZenTech", "Корпоративные", "Экосистемы"],
@@ -97,6 +116,22 @@ const t = {
     contactTitle1: "Связаться с ",
     contactTitle2: "Архитектором",
     contactDesc: "Расскажите о корпоративной задаче. Сообщение поступит напрямую Бакыту Гаипову.",
+    services: {
+      kicker: "— Модели Интеграции",
+      title: "Корпоративные Решения и Услуги",
+      auditTitle: "01 / ИИ & Технологический Аудит",
+      auditDesc: "Глубокий аудит вашей текущей ИТ-инфраструктуры, проектирование схемы будущей архитектуры на MERN+ИИ и расчет окупаемости (ROI).",
+      auditPrice: "490 $ / Фиксированная цена",
+      auditCta: "Забронировать через Stripe",
+      aiTitle: "02 / Интеграция Кастомного ИИ",
+      aiDesc: "Разработка уникальных ИИ-агентов (LLM), внедряемых в ваши CRM/ERP системы для автоматизации воркфлоу и снижения OpEx до 40%.",
+      aiPrice: "2 490 $ / За деплой",
+      aiCta: "Активировать ИИ-Ядро",
+      ecoTitle: "03 / Цифровая Экосистема под Ключ",
+      ecoDesc: "Полное проектирование и разработка отказоустойчивой ИТ-основы предприятия. Промышленная автоматизация, высоконагруженный MERN и Zero-Trust безопасность.",
+      ecoPrice: "Кастомный B2B Контракт",
+      ecoCta: "Запросить Коммерческое Предложение",
+    },
   },
 } as const;
 
@@ -180,6 +215,7 @@ function Index() {
           <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
             <a href="#pillars" className="hover:text-primary transition">{L.pillars}</a>
             <a href="#why" className="hover:text-primary transition">{L.capabilities}</a>
+            <a href="#services" className="hover:text-primary transition">{L.servicesNav}</a>
             <a href="#contact" className="hover:text-primary transition">{L.contact}</a>
           </nav>
           <div className="flex items-center gap-3">
@@ -200,7 +236,7 @@ function Index() {
               </button>
             </div>
             <a
-              href={STRIPE_LINK}
+              href={STRIPE_AUDIT_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:inline-flex items-center gap-2 rounded-md border border-primary/40 px-4 py-2 text-sm text-primary hover:bg-primary/10 transition"
@@ -235,7 +271,7 @@ function Index() {
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <a
-              href={STRIPE_LINK}
+              href={STRIPE_AUDIT_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-md bg-gradient-primary text-primary-foreground font-semibold px-6 py-3.5 shadow-glow hover:scale-[1.02] transition-transform"
@@ -322,6 +358,61 @@ function Index() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <section id="services" className="relative z-10 mx-auto max-w-7xl px-6 py-16 md:py-24 border-t border-border">
+        <div className="mb-14 text-center">
+          <p className="font-mono text-xs text-primary tracking-widest uppercase">{L.services.kicker}</p>
+          <h2 className="mt-3 text-4xl md:text-5xl font-bold tracking-tight">{L.services.title}</h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Audit */}
+          <div className="group relative rounded-xl border border-border bg-card/60 backdrop-blur p-7 hover:border-primary/60 transition-all hover:shadow-glow-sm flex flex-col">
+            <h3 className="font-mono text-xs text-primary uppercase tracking-wider">{L.services.auditTitle}</h3>
+            <p className="mt-4 text-muted-foreground leading-relaxed flex-1">{L.services.auditDesc}</p>
+            <div className="mt-6 text-2xl font-bold text-foreground">{L.services.auditPrice}</div>
+            <a
+              href={STRIPE_AUDIT_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center justify-center gap-2 rounded-md bg-gradient-primary text-primary-foreground font-semibold px-5 py-3 shadow-glow hover:scale-[1.02] transition-transform"
+            >
+              {L.services.auditCta}
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+
+          {/* AI Integration */}
+          <div className="group relative rounded-xl border border-border bg-card/60 backdrop-blur p-7 hover:border-primary/60 transition-all hover:shadow-glow-sm flex flex-col">
+            <h3 className="font-mono text-xs text-primary uppercase tracking-wider">{L.services.aiTitle}</h3>
+            <p className="mt-4 text-muted-foreground leading-relaxed flex-1">{L.services.aiDesc}</p>
+            <div className="mt-6 text-2xl font-bold text-foreground">{L.services.aiPrice}</div>
+            <a
+              href={STRIPE_AI_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center justify-center gap-2 rounded-md bg-gradient-primary text-primary-foreground font-semibold px-5 py-3 shadow-glow hover:scale-[1.02] transition-transform"
+            >
+              {L.services.aiCta}
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+
+          {/* Ecosystem */}
+          <div className="group relative rounded-xl border border-border bg-card/60 backdrop-blur p-7 hover:border-primary/60 transition-all hover:shadow-glow-sm flex flex-col md:col-span-2 lg:col-span-1">
+            <h3 className="font-mono text-xs text-primary uppercase tracking-wider">{L.services.ecoTitle}</h3>
+            <p className="mt-4 text-muted-foreground leading-relaxed flex-1">{L.services.ecoDesc}</p>
+            <div className="mt-6 text-2xl font-bold text-foreground">{L.services.ecoPrice}</div>
+            <a
+              href="#contact"
+              className="mt-5 inline-flex items-center justify-center gap-2 rounded-md border border-primary/40 bg-background/40 backdrop-blur px-5 py-3 font-semibold text-foreground hover:bg-primary/10 hover:border-primary transition"
+            >
+              {L.services.ecoCta}
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
         </div>
       </section>
 
