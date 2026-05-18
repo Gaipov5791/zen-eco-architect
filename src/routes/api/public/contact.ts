@@ -23,7 +23,7 @@ export const Route = createFileRoute("/api/public/contact")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const apiKey = process.env.RESEND_API_KEY;
+        const apiKey = process.env.RESEND_API_KEY || (import.meta.env && import.meta.env.VITE_RESEND_API_KEY);
         if (!apiKey) {
           return Response.json(
             { error: "Email service not configured" },
