@@ -59,7 +59,7 @@ const t = {
     ctaExplore: "Explore Our Pillars",
     stats: [
       { k: "40%", v: "OpEx reduction" },
-      { k: "3", v: "Live ecosystems" },
+      { k: "{n}", v: "Live ecosystems" },
       { k: "24/7", v: "AI uptime" },
     ],
     pillarsKicker: "— Proof of architecture",
@@ -106,7 +106,7 @@ const t = {
     ctaExplore: "Доказательство Архитектуры",
     stats: [
       { k: "40%", v: "Снижение OpEx" },
-      { k: "3", v: "Готовых экосистемы" },
+      { k: "{n}", v: "Готовых экосистем" },
       { k: "24/7", v: "ИИ доступность" },
     ],
     pillarsKicker: "— Доказательство архитектуры",
@@ -381,7 +381,9 @@ function Index() {
           <div className="mt-10 grid grid-cols-3 gap-6 max-w-md">
             {L.stats.map((s) => (
               <div key={s.v}>
-                <div className="text-2xl font-bold text-primary text-glow">{s.k}</div>
+                <div className="text-2xl font-bold text-primary text-glow">
+                  {s.k.replace("{n}", String(pillars.length))}
+                </div>
                 <div className="text-xs text-muted-foreground mt-1">{s.v}</div>
               </div>
             ))}
