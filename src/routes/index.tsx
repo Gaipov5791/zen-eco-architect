@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, Cpu, Globe2, Waves, Brain, Shield, Zap, Phone, MessageSquare, ExternalLink, Menu, X } from "lucide-react";
+import { ArrowRight, Cpu, Globe2, Waves, Brain, Shield, Zap, Phone, MessageSquare, ExternalLink, Menu, X, Github } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import { ContactForm } from "@/components/ContactForm";
 import cyborg from "@/assets/cyborg-architect.jpg";
@@ -63,7 +63,7 @@ const t = {
       { k: "24/7", v: "AI uptime" },
     ],
     pillarsKicker: "— Proof of architecture",
-    pillarsTitle: "The Three Pillars",
+    pillarsTitle: "Project Showcase",
     pillarsDesc: "Production ecosystems engineered, deployed, and operated under the ZenTech standard.",
     contactKicker: "— Initiate contact",
     contactTitle1: "Engage the ",
@@ -110,7 +110,7 @@ const t = {
       { k: "24/7", v: "ИИ доступность" },
     ],
     pillarsKicker: "— Доказательство архитектуры",
-    pillarsTitle: "Три Столпа",
+    pillarsTitle: "Портфолио Проектов",
     pillarsDesc: "Производственные экосистемы, спроектированные и эксплуатируемые по стандарту ZenTech.",
     contactKicker: "— Инициировать контакт",
     contactTitle1: "Связаться с ",
@@ -135,42 +135,86 @@ const t = {
   },
 } as const;
 
-const pillars = [
+type Cat = "gov" | "ai" | "mern";
+const GH = "https://github.com/gaipov5791/";
+const pillars: {
+  name: string; cat: Cat; status: { en: string; ru: string };
+  tag: { en: string; ru: string }; desc: { en: string; ru: string };
+  icon: typeof Globe2; url?: string; repo: string; stack: string[];
+}[] = [
   {
-    name: "Birge Web",
-    tag: { en: "MERN Infrastructure", ru: "MERN Инфраструктура" },
+    name: "NIF.kg", cat: "gov",
+    status: { en: "Live · GovTech", ru: "Live · GovTech" },
+    tag: { en: "National Investment Fund", ru: "Национальный Инвест. Фонд" },
     desc: {
-      en: "Resilient full-stack platforms unifying corporate operations on a single, scalable MERN backbone.",
-      ru: "Отказоустойчивые full-stack платформы, объединяющие корпоративные операции на масштабируемой MERN-основе.",
+      en: "Official digital platform for a national-scale investment fund — secure, multilingual, enterprise-grade.",
+      ru: "Официальная цифровая платформа национального инвестиционного фонда — безопасная, мультиязычная, enterprise-уровня.",
     },
-    icon: Globe2,
-    url: "https://birge-mern-fullstack.vercel.app",
+    icon: Shield, url: "https://nif.kg", repo: GH + "national-found", stack: ["TypeScript", "React", "Cloud"],
   },
   {
-    name: "Elbrus Hydro",
-    tag: { en: "Industrial Automation", ru: "Промышленная Автоматизация" },
+    name: "VibeHunt AI", cat: "ai",
+    status: { en: "Autonomous Agent", ru: "Автономный Агент" },
+    tag: { en: "AI Job-Hunting Agent", ru: "ИИ-агент поиска работы" },
     desc: {
-      en: "Real-time monitoring and predictive workflow automation for heavy-asset energy operations.",
-      ru: "Мониторинг в реальном времени и предиктивная автоматизация для энергетических активов.",
+      en: "Autonomous Telegram agent that scans channels, scores vacancies with Gemini and responds on your behalf.",
+      ru: "Автономный Telegram-агент: сканирует каналы, оценивает вакансии через Gemini и откликается за вас.",
     },
-    icon: Waves,
-    url: "https://gaipov5791.github.io/powerstation-present/",
+    icon: Zap, repo: GH + "vibehunt-ai", stack: ["TypeScript", "Gemini", "GramJS"],
   },
   {
-    name: "ZenTechAI",
+    name: "Smart Support Hub", cat: "ai",
+    status: { en: "Live Production", ru: "Live Production" },
+    tag: { en: "B2B AI Support Ops", ru: "B2B ИИ-поддержка" },
+    desc: {
+      en: "AI-assisted helpdesk that triages tickets, drafts replies and cuts support response time.",
+      ru: "ИИ-хелпдеск: сортирует обращения, готовит ответы и сокращает время реакции поддержки.",
+    },
+    icon: MessageSquare, url: "https://smart-support-hub-two.vercel.app", repo: GH + "smart-support-hub", stack: ["TypeScript", "LLM", "Vercel"],
+  },
+  {
+    name: "ZenTechAI", cat: "ai",
+    status: { en: "Live Production", ru: "Live Production" },
     tag: { en: "Custom AI Intelligence", ru: "Кастомный ИИ" },
     desc: {
       en: "Bespoke LLM agents and inference pipelines that reduce operational expenses by up to 40%.",
       ru: "Кастомные LLM-агенты и пайплайны инференса, снижающие операционные расходы до 40%.",
     },
-    icon: Brain,
-    url: "https://zen-tech-75uo3mn9y-gaipov5791s-projects.vercel.app",
+    icon: Brain, url: "https://zen-tech-75uo3mn9y-gaipov5791s-projects.vercel.app", repo: GH + "ZenTechAI", stack: ["TypeScript", "AI", "Vercel"],
   },
+  {
+    name: "Birge Web", cat: "mern",
+    status: { en: "Live Production", ru: "Live Production" },
+    tag: { en: "MERN Infrastructure", ru: "MERN Инфраструктура" },
+    desc: {
+      en: "Resilient full-stack platforms unifying corporate operations on a single, scalable MERN backbone.",
+      ru: "Отказоустойчивые full-stack платформы, объединяющие корпоративные операции на масштабируемой MERN-основе.",
+    },
+    icon: Globe2, url: "https://birge-mern-fullstack.vercel.app", repo: GH + "birge_mern_fullstack", stack: ["MongoDB", "Express", "React", "Node"],
+  },
+  {
+    name: "Elbrus Hydro", cat: "mern",
+    status: { en: "Industrial", ru: "Промышленность" },
+    tag: { en: "Industrial Automation", ru: "Промышленная Автоматизация" },
+    desc: {
+      en: "Real-time monitoring and predictive workflow automation for heavy-asset energy operations.",
+      ru: "Мониторинг в реальном времени и предиктивная автоматизация для энергетических активов.",
+    },
+    icon: Waves, url: "https://gaipov5791.github.io/powerstation-present/", repo: GH + "powerstation-present", stack: ["TypeScript", "React", "Data Viz"],
+  },
+];
+
+const FILTERS: { id: "all" | Cat; en: string; ru: string }[] = [
+  { id: "all", en: "All", ru: "Все" },
+  { id: "gov", en: "Enterprise & GovTech", ru: "Enterprise и GovTech" },
+  { id: "ai", en: "AI Agents & LLM", ru: "ИИ-агенты и LLM" },
+  { id: "mern", en: "Industrial & MERN", ru: "Промышленность и MERN" },
 ];
 
 function Index() {
   const [lang, setLang] = useState<Lang>("ru");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [filter, setFilter] = useState<"all" | Cat>("all");
   const L = t[lang];
   const closeMenu = () => setIsMobileMenuOpen(false);
 
@@ -370,25 +414,51 @@ function Index() {
           <h2 className="mt-3 text-4xl md:text-5xl font-bold tracking-tight">{L.pillarsTitle}</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">{L.pillarsDesc}</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {pillars.map((p) => (
-            <a
-              key={p.name}
-              href={p.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative rounded-xl border border-border bg-card/60 backdrop-blur p-7 hover:border-primary/60 transition-all hover:shadow-glow-sm block"
+        <div className="mb-10 flex flex-wrap justify-center gap-2">
+          {FILTERS.map((f) => (
+            <button
+              key={f.id}
+              onClick={() => setFilter(f.id)}
+              className={`rounded-full border px-4 py-2 font-mono text-xs uppercase tracking-wider transition ${filter === f.id ? "border-primary bg-primary/15 text-primary shadow-glow-sm" : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"}`}
             >
-              <div className="flex items-start justify-between">
+              {f[lang]}
+            </button>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {pillars.filter((p) => filter === "all" || p.cat === filter).map((p) => (
+            <div
+              key={p.name}
+              className="group relative flex flex-col rounded-xl border border-border bg-card/60 backdrop-blur p-7 hover:border-primary/60 transition-all hover:shadow-glow-sm"
+            >
+              <div className="flex items-start justify-between gap-3">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 border border-primary/30 text-primary group-hover:shadow-glow-sm transition">
                   <p.icon className="h-6 w-6" />
                 </div>
-                <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-primary transition" />
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-primary">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                  {p.status[lang]}
+                </span>
               </div>
               <div className="mt-5 font-mono text-xs text-primary uppercase tracking-wider">{p.tag[lang]}</div>
               <h3 className="mt-1 text-2xl font-bold">{p.name}</h3>
-              <p className="mt-3 text-muted-foreground leading-relaxed">{p.desc[lang]}</p>
-            </a>
+              <p className="mt-3 text-muted-foreground leading-relaxed flex-1">{p.desc[lang]}</p>
+              <div className="mt-5 flex flex-wrap gap-1.5">
+                {p.stack.map((s) => (
+                  <span key={s} className="rounded border border-border bg-background/60 px-2 py-0.5 font-mono text-[10px] text-muted-foreground">{s}</span>
+                ))}
+              </div>
+              <div className="mt-6 flex gap-2">
+                {p.url && (
+                  <a href={p.url} target="_blank" rel="noopener noreferrer" className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md bg-gradient-primary px-3 py-2 text-sm font-semibold text-primary-foreground hover:shadow-glow-sm transition">
+                    <ExternalLink className="h-4 w-4" /> {lang === "ru" ? "Демо" : "Live Demo"}
+                  </a>
+                )}
+                <a href={p.repo} target="_blank" rel="noopener noreferrer" className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-md border border-border px-3 py-2 text-sm font-semibold hover:border-primary/60 hover:text-primary transition">
+                  <Github className="h-4 w-4" /> GitHub
+                </a>
+              </div>
+            </div>
           ))}
         </div>
       </section>
